@@ -3,40 +3,96 @@
 	<title>Welcome to Kosmodrome Games</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<style type="text/css">
+		html {
+			min-height: 100%;
+		}
+
 		body {
-			color: #141312;
-			background-color: #141312;
+			position: relative;
 			margin: 0;
-		}
-
-		p {
-			text-align: center;
-			font-size: 22px;
+			min-height: 100vh;
+			padding: 8vh 24px 32px;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			overflow: hidden;
 			color: #629176;
-			background-color: #141312;
+			font-family: Georgia, "Times New Roman", serif;
+			background-color: #060606;
+			--logo-width: min(420px, 48vw);
+			--enemy-gap: 10px;
+			--enemy-top: 8px;
+			--enemy-hit-x: calc(100% - var(--logo-width) - 32px - var(--enemy-gap));
 		}
 
-		.head {
-			position: absolute;
-			right: 33px;
-			top: 33px;
-			width: 333px;
-			height: 333px;
+		body:before {
+			content: "";
+			position: fixed;
+			inset: 72px 56px 96px;
+			background-image: url('BtR.png');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			pointer-events: none;
+		}
+
+		.page {
+			position: relative;
+			z-index: 1;
+			width: 100%;
+			min-height: calc(100vh - 8vh - 32px);
 		}
 
 		.inner {
-			line-height: 0.3;
-			padding-top: 110px;
+			position: relative;
+			min-height: inherit;
+		}
+
+		.brand-logo {
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: block;
+			width: var(--logo-width);
+			height: auto;
+		}
+
+		.enemy {
+			position: absolute;
+			left: var(--enemy-hit-x);
+			top: var(--enemy-top);
+			z-index: 2;
+			width: 32px;
+			height: 32px;
+			image-rendering: pixelated;
+			pointer-events: none;
+		}
+
+		@media (max-width: 640px) {
+			body {
+				padding: 28px 14px 24px;
+				--logo-width: min(260px, 62vw);
+				--enemy-top: 4px;
+				--enemy-hit-x: calc(100% - var(--logo-width) - 32px - 6px);
+			}
+
+			body:before {
+				inset: 88px 18px 72px;
+			}
+
+			.page {
+				min-height: calc(100vh - 52px);
+			}
+
 		}
 	</style>
 </head>
 
 <body>
-	<div class="inner">
-		<p class="meta">Welcome to Kosmodrome Games</p>
-		<p class="meta">
-			stay tuned...
-			<img src="enemy.gif" alt="enemy" width="32" height="32" />
-		</p>
+	<div class="page">
+		<div class="inner">
+			<img class="brand-logo" src="Kosmodrome.png" alt="Kosmodrome Games" />
+			<img class="enemy" src="enemy.gif" alt="enemy" width="32" height="32" />
+		</div>
 	</div>
 </body>
